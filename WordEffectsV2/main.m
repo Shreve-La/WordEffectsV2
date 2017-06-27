@@ -13,7 +13,7 @@ int main(int argc, const char * argv[]) {
         BOOL gameOn = YES;
         while (gameOn) {
         
-#pragma User Input: String
+#pragma mark User Input:
         char inputChars[255]; // 255 unit long array of characters
         printf("Input a string: ");  // limit input to max 255 characters
         fgets(inputChars, 255, stdin);
@@ -29,33 +29,22 @@ int main(int argc, const char * argv[]) {
             if([lastCharacter isEqualToString:@"?"]){NSLog(@"I don't know the answer to that question");}
             
             
-#pragma String Operations
+#pragma mark String Operations
             // Make the string LOUDER
             NSString *capitalize = inputString.uppercaseString;
-//            NSLog(@"All Caps: %@. Memory Address: %p", capitalize, capitalize);
             
             // Make the string lowercase
             NSString *lowercase = inputString.lowercaseString;
-//            NSLog(@"Lowercase: %@. MemoryAddress: %p", lowercase, lowercase);
             
             //Convert to Integer
             int intValue = inputString.intValue;
             if (intValue == 0){NSLog(@"Conversion failed. '%@' is not a number", inputString);}
-//          NSLog(@"Integer Value: %d", intValue);
-//          NSLog(@"Memory Address: %x", intValue);
             
             //Add eh? to make it seem Canadian
             NSString *canadianize = [inputString stringByAppendingString:@"eh?"];
- //           NSLog(@"Canadianized: %@", canadianize);
- //           NSLog(@"Memory Address: %p", canadianize);
-            
+
             //de space it
             NSString *deSpaceIt = [inputString stringByReplacingOccurrencesOfString:@" " withString:@""];
-//            NSLog(@"De-Spaced: %@", deSpaceIt);
-            
-            
-            
-            
             
             
 #pragma Mark Word Count
@@ -70,11 +59,6 @@ int main(int argc, const char * argv[]) {
             wordCount = actualWords.count;
             NSLog(@"word Count %lu", wordCount);
             
-            
-            
-            
-            
-            
 #pragma Mark User Selection: Transformation
         // print NSString memory address
         // NSLog(@"Memory address was: %p", inputString);
@@ -87,7 +71,7 @@ int main(int argc, const char * argv[]) {
             fgets(inputChars, 255, stdin);
             
             
-            
+#pragma Mark Output - transformed string
             // print as a c string
             printf("Your string is %s\n", inputChars);
             // convert char array to an NSString object
@@ -95,13 +79,25 @@ int main(int argc, const char * argv[]) {
            
             switch ([transform intValue]) {
                 case 1:
-                    NSLog(@"All Caps: %@. Memory Address: %d", capitalize, &capitalize);
+                    NSLog(@"All Caps: %@. Memory Address: %p", capitalize, &capitalize);
                     break;
-                    
+                case 2:
+                    NSLog(@"Lowercase: %@. MemoryAddress: %p", lowercase, &lowercase);
+                    break;
+                case 3:
+                    NSLog(@"Integer Value: %d", intValue);
+                    break;
+                case 4:
+                    NSLog(@"Canadianized: %@", canadianize);
+                    NSLog(@"Memory Address: %p", canadianize);
+                    break;
+                case 5:
+                    NSLog(@"De-Spaced: %@", deSpaceIt);
+                    break;
                 default:
                     break;
             }
-                        
+            
             
             
             
