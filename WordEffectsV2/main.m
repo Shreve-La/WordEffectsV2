@@ -23,10 +23,12 @@ int main(int argc, const char * argv[]) {
         
         // print as a c string
         printf("Your string is %s\n", inputChars);
-        
+#pragma String Operations
         // convert char array to an NSString object
         NSString *inputString = [NSString stringWithUTF8String:inputChars];
-        
+        inputString = [inputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *lastCharacter = [inputString substringFromIndex:inputString.length-1];
+            if([lastCharacter isEqualToString:@"?"]){NSLog(@"I don't know the answer to that question");}
         // print NSString object
         NSLog(@"Input was: %@", inputString);
         
@@ -40,9 +42,33 @@ int main(int argc, const char * argv[]) {
         // Make the string lowercase
             NSString *lowercase = inputString.lowercaseString;
             NSLog(@"Lowercase: %@. MemoryAddress: %p", lowercase, lowercase);
+        
+            //Convert to Integer
+            int intValue = inputString.intValue;
+            if (intValue == 0){NSLog(@"Conversion failed. '%@' is not a number", inputString);}
+            NSLog(@"Integer Value: %d", intValue);
+            NSLog(@"Memory Address: %x", intValue);
             
+            //Add eh? to make it seem Canadian
+            NSString *canadianize = [inputString stringByAppendingString:@"eh?"];
+            NSLog(@"Canadianized: %@", canadianize);
+            NSLog(@"Memory Address: %p", canadianize);
             
-
+            //de space it
+            NSString *deSpaceIt = [inputString stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSLog(@"De-Spaced: %@", deSpaceIt);
+            
+            //word count
+                NSUInteger wordCount;
+                NSCharacterSet *separators = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+                NSArray *words = [inputString componentsSeparatedByCharactersInSet:separators];
+            NSMutableArray *actualWords = [[NSMutableArray alloc] init];
+            for (NSString *word in words) {
+                if (![word isEqualToString:@" "] && ![word isEqualToString:@""]){[actualWords addObject:word];}
+            }
+                wordCount = actualWords.count;
+                NSLog(@"word Count %lu", wordCount);
+        }
         
         
         
@@ -57,6 +83,5 @@ int main(int argc, const char * argv[]) {
         
         
         
-    }
-    return 0;
+
 }
